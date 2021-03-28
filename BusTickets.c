@@ -97,28 +97,14 @@ void BusFile()
     switch (dec) {
 
         case 1:
-         fp = fopen("seats1.txt","r+");
-
-         fgets(seat,80, stdin);
-         if (seat[strlen(seat)-1] == '\n'){
-
-         }
-         else{
-
-         }
-         fclose(fp);
-
-         fp2 = fopen("name1.txt","r+");
-         fgets(name,200, stdin);
-         if (name[strlen(name)-1] == '\n'){
-
-         }
-         else{
-
-         }
-         fclose(fp2);
-         BusSeats();
-         break;
+        fp = fopen("seats1.txt","r+");
+        fgets(seat,80,fp);
+        fclose(fp);
+        fp2 = fopen("name1.txt","r+");
+        fgets(name,200,fp2);
+        fclose(fp2);
+        BusSeats();
+        break;
 
         case 2:
          fp = fopen("seats2.txt","r+");
