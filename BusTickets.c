@@ -12,10 +12,11 @@ void List();
 void Book();
 void Register();
 void nameT();
+void LogIn();
 
 char fs[80];
 const char login[] = "user", pass[] = "pass";
-char loginv[] = "user", passv[] = "pass";
+char login_input[] = "user", pass_input[] = "pass";
 char list[30][10]={"Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty", "Empty "};
 int fs1;
 int i;
@@ -33,24 +34,7 @@ int m=0, n=0;
 
 int main()
 {
-    printf("Username:\n");
-    scanf("%s", loginv);
-
-    if (strcmp(loginv,login) == 0){
-        printf("Pass:\n");
-        scanf("%s", passv);
-
-        if(strcmp(passv,pass) == 0){
-            printf("Ok, now you have acces to the system, enjoy!\n\n\n");
-            printf("Welcome to the Bus Ticket System, chose the options from below:\n\n");
-            List();
-        }
-        
-        else
-            printf("Incorrect Pass\n");
-    }
-    else
-        printf("Seems like you dont have acces\n");
+  LogIn();
 }
 
 void List()
@@ -135,7 +119,7 @@ void BusFile()
          fclose(fp2);
          BusSeats();
          break;
-        
+
         case 2:
          fp = fopen("seats2.txt","r+");
          fgets(seat,80,fp);
@@ -166,7 +150,7 @@ void BusFile()
          BusSeats();
          break;
 
-        case 5: 
+        case 5:
          fp = fopen("seats5.txt","r+");
          fgets(seat,80,fp);
          fclose(fp);
@@ -229,4 +213,24 @@ void Register()
     fgets(fs,80,fp);
     fclose(fp);
     BusSeats();
+}
+void LogIn() {
+  printf("Username:\n");
+  scanf("%s", login_input);
+
+  if (strcmp(login_input,login) == 0){
+      printf("Pass:\n");
+      scanf("%s", pass_input);
+
+      if(strcmp(pass_input,pass) == 0){
+          printf("Ok, now you have acces to the system, enjoy!\n\n\n");
+          printf("Welcome to the Bus Ticket System, chose the options from below:\n\n");
+          List();
+      }
+
+      else
+          printf("Incorrect Pass\n");
+  }
+  else
+      printf("Seems like you dont have acces\n");
 }
