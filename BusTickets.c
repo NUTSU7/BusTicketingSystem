@@ -13,6 +13,7 @@ void Book();
 void Register();
 void nameT();
 void LogIn();
+void SplitName();
 
 char fs[80];
 const char login[] = "user", pass[] = "pass";
@@ -29,8 +30,8 @@ char name1[30][10];
 int tcount;
 char s='1', v= '1';
 int a=0, b=0;
-int j=0, k=0;
-int m=0, n=0;
+//int j=0, k=0;
+//int m=0, n=0;
 
 int main()
 {
@@ -103,6 +104,7 @@ void BusFile()
         fp2 = fopen("name1.txt","r+");
         fgets(name,200,fp2);
         fclose(fp2);
+        SplitName();
         BusSeats();
         break;
 
@@ -113,6 +115,7 @@ void BusFile()
          fp2 = fopen("name2.txt","r+");
          fgets(name,200,fp2);
          fclose(fp2);
+         SplitName();
          BusSeats();
          break;
 
@@ -123,6 +126,7 @@ void BusFile()
          fp2 = fopen("name3.txt","r+");
          fgets(name,200,fp2);
          fclose(fp2);
+         SplitName();
          BusSeats();
          break;
 
@@ -133,6 +137,7 @@ void BusFile()
          fp2 = fopen("name4.txt","r+");
          fgets(name,200,fp2);
          fclose(fp2);
+         SplitName();
          BusSeats();
          break;
 
@@ -143,9 +148,35 @@ void BusFile()
          fp2 = fopen("name5.txt","r+");
          fgets(name,200,fp2);
          fclose(fp2);
+         SplitName();
          BusSeats();
          break;
         }
+}
+
+void SplitName()
+{
+  int cnt=0;
+  int j=0;
+  int i;
+  for(i=0;i<=(strlen(name));i++)
+      {
+          // if space or NULL found, assign NULL into splitStrings[cnt]
+          if(name[i]==' '||name[i]=='\0')
+          {
+              name1[cnt][j]='\0';
+              cnt++;  //for next word
+              j=0;    //for next word, init index to 0
+          }
+          else
+          {
+              name1[cnt][j]=name[i];
+              j++;
+          }
+      }
+      for(int i=0; i<1; i++){
+        printf("%s\n",name1[i]);
+      }
 }
 
 void nameT()
@@ -176,9 +207,10 @@ void BusStatus()
 void BusSeats()
 {
     seat1 = atoi(seat);
+    int nameP=0;
     for(i=1; i<=30; i++){
         if(i == seat1){
-            printf(" %s.%s\t", seat, name);
+            printf(" %s.%d\t", seat, name[nameP]);
             continue;
         }
         else
