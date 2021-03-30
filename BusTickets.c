@@ -205,10 +205,10 @@ void BusSeats()
 {
     for(i=1; i<=30; i++){
         if(i<3){
-            printf("%d.%s", i, nameSplit[i-1]);
+            printf("%d.%s\t", i, nameSplit[i-1]);
         }
         else
-            printf(" %d.%s\t", i, list[i-1]); /* to start the array from */
+            printf(" %d.%s\t", i, list[i-1]); /* idk */
 
 }
     printf("\n\n\nAvailable Seats:%d\n",30-j);
