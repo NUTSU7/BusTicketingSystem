@@ -204,7 +204,7 @@ void BusStatus()
 void BusSeats()
 {
     for(i=1; i<=30; i++){
-        if(i<3){
+        if(i<3){ //its i<3 cuz i just want to test if it can print right, there should be countNames so it will know how many times to print names
             printf("%d.%s\t", i, nameSplit[i-1]);
         }
         else
