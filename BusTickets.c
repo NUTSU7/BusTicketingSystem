@@ -19,12 +19,12 @@ void SplitNames();
 // Variables
 const char login[] = "user", pass[] = "pass"; // login verifier
 char login_input[] = "user", pass_input[] = "pass"; // pass
-char list[30][10]={"Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty", "Empty "};
+char list[32][10]={"Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty", "Empty "};
 int dec; // decisions
 char seat[200]; // seat string taken from file
 char seat2[30][80]; // seat string after being splitted
 char name[200]; // name string taken from file
-char nameSplit[30][10]; // name string splitted into array elements so u can print it
+char nameSplit[32][10]; // name string splitted into array elements so u can print it
 int cnt=0; // used for spliting the strings
 int j=0;
 int i;
@@ -203,12 +203,16 @@ void BusStatus()
 
 void BusSeats()
 {
-    for(i=1; i<=30; i++){
-        if(i<3){ //its i<3 cuz i just want to test if it can print right, there should be countNames so it will know how many times to print names
-            printf("\n%d.%s", i, nameSplit[i-1]);
+  int z=0;
+    for(i=1; i<=32; i++){
+      if(i % 4 == 0){
+        printf("%d.%s\n", i, list[i-1]);
+      }
+        else if(i<3){ //its i<3 cuz i just want to test if it can print right, there should be countNames so it will know how many times to print names
+            printf("%d.%s\t", i, nameSplit[i-1]);
         }
         else
-            printf("%d.%s\n", i, list[i-1]); /* idk */
+            printf("%d.%s\t", i, list[i-1]); /* idk */
 
 }
     printf("\n\n\nAvailable Seats:%d\n",30-j);
