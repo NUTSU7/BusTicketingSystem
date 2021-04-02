@@ -5,15 +5,14 @@
 
 // Functions
 void BusList();
-void BusFile();
-void SplitNames();
+void Book();
 void CancelT();
+void BusFile();
 void BusStatus();
+void SplitNames();
 void BusSeats();
 void List();
-void Book();
 void Register();
-void nameT();
 void LogIn();
 
 // Variables
@@ -80,6 +79,34 @@ void BusList()
 
 }
 
+void Book()
+{
+    BusFile();
+    BusSeats();
+//    BusList();
+}
+
+void CancelT()
+{
+    printf("Under Construction\n");
+}
+
+void BusStatus()
+{
+    BusFile();
+    BusSeats();
+    printf("\n\nGoing back in 5s\n");
+    sleep(2);
+    printf("Going back in 3s\n");
+    sleep(1);
+    printf("Going back in 2s\n");
+    sleep(1);
+    printf("Going back in 1s\n");
+    sleep(1);
+    printf("\n\n");
+    List();
+}
+
 void BusFile()
 {
     FILE *fp, *fopen();
@@ -96,7 +123,6 @@ void BusFile()
         fgets(name,200,fp);
         fclose(fp);
         SplitNames();
-        BusSeats();
         break;
 
         case 2:
@@ -104,7 +130,6 @@ void BusFile()
          fgets(name,200,fp);
          fclose(fp);
          SplitNames();
-         BusSeats();
          break;
 
         case 3:
@@ -112,7 +137,6 @@ void BusFile()
          fgets(name,200,fp);
          fclose(fp);
          SplitNames();
-         BusSeats();
          break;
 
         case 4:
@@ -120,7 +144,6 @@ void BusFile()
          fgets(name,200,fp);
          fclose(fp);
          SplitNames();
-         BusSeats();
          break;
 
         case 5:
@@ -128,7 +151,6 @@ void BusFile()
          fgets(name,200,fp);
          fclose(fp);
          SplitNames();
-         BusSeats();
          break;
         }
 }
@@ -158,31 +180,6 @@ void SplitNames()
 //      }
 }
 
-void nameT()
-{
-
-}
-
-void CancelT()
-{
-    printf("Under Construction\n");
-}
-
-void BusStatus()
-{
-    BusFile();
-    printf("\n\nGoing back in 5s\n");
-    sleep(2);
-    printf("Going back in 3s\n");
-    sleep(1);
-    printf("Going back in 2s\n");
-    sleep(1);
-    printf("Going back in 1s\n");
-    sleep(1);
-    printf("\n\n");
-    List();
-}
-
 void BusSeats()
 {
       for(i=1; i<=32; i++){
@@ -200,18 +197,14 @@ void BusSeats()
           }
 
 }
-    printf("\n\n\nAvailable Seats:%d\n",30-j);
-}
-
-void Book()
-{
-    BusFile();
+    printf("\n\n\nAvailable Seats:%d\n",30-countNames);
 }
 
 void Register()
 {
 
 }
+
 void LogIn() {
   printf("Username:\n");
   scanf("%s", login_input);
