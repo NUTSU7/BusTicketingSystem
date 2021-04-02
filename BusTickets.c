@@ -7,8 +7,9 @@
 void BusList();
 void Book();
 void CancelT();
-void BusFile();
 void BusStatus();
+void BusFileRead();
+void BusFileWrite();
 void SplitNames();
 void BusSeats();
 void List();
@@ -26,6 +27,8 @@ int cnt=0; // used for spliting the strings
 int j=0;
 int i;
 int countNames=0;
+int numTickets;
+char resName[100];
 
 int main()
 {
@@ -81,8 +84,10 @@ void BusList()
 
 void Book()
 {
-    BusFile();
+    BusFileRead();
+    SplitNames();
     BusSeats();
+    Register();
 //    BusList();
 }
 
@@ -93,7 +98,8 @@ void CancelT()
 
 void BusStatus()
 {
-    BusFile();
+    BusFileRead();
+    SplitNames();
     BusSeats();
     printf("\n\nGoing back in 5s\n");
     sleep(2);
@@ -107,7 +113,7 @@ void BusStatus()
     List();
 }
 
-void BusFile()
+void BusFileRead()
 {
     FILE *fp, *fopen();
 
@@ -122,35 +128,30 @@ void BusFile()
         fp = fopen("name1.txt","r+");
         fgets(name,200,fp);
         fclose(fp);
-        SplitNames();
         break;
 
         case 2:
          fp = fopen("name2.txt","r+");
          fgets(name,200,fp);
          fclose(fp);
-         SplitNames();
          break;
 
         case 3:
          fp = fopen("name3.txt","r+");
          fgets(name,200,fp);
          fclose(fp);
-         SplitNames();
          break;
 
         case 4:
          fp = fopen("name4.txt","r+");
          fgets(name,200,fp);
          fclose(fp);
-         SplitNames();
          break;
 
         case 5:
          fp = fopen("name5.txt","r+");
          fgets(name,200,fp);
          fclose(fp);
-         SplitNames();
          break;
         }
 }
@@ -160,12 +161,11 @@ void SplitNames()
   for(i=0;i<=(strlen(name));i++)
       {
           // if space or NULL found, assign NULL into splitStrings[cnt]
-          if(name[i]==' '||name[i]=='\0')
+          if(name[i]=='\0'||name[i]==' ')
           {
-              nameSplit[cnt][j]='\0';
+//              nameSplit[cnt][j]='';
               cnt++;  //for next word
               j=0;    //for next word, init index to 0
-              countNames++;
           }
           else
           {
@@ -173,20 +173,16 @@ void SplitNames()
               j++;
           }
       }
-
-//      for(int i=0; i<cntName; i++)
-//      {
-//        printf("%d.%s\t", i+1, name1[i]);
-//      }
 }
 
 void BusSeats()
 {
+  countNames=cnt-1;
       for(i=1; i<=32; i++){
       if(i % 4 == 0 && i<= countNames){
         printf("%d.%s\n", i, nameSplit[i-1]);
       }
-        else if(i<=countNames){
+        else if(i<cnt){
             printf("%d.%s\t", i, nameSplit[i-1]);
         }
         else if(i % 4 == 0 && i>countNames){
@@ -197,12 +193,55 @@ void BusSeats()
           }
 
 }
-    printf("\n\n\nAvailable Seats:%d\n",30-countNames);
+    printf("\n\n\n\t\tAvailable Seats:%d\n",32-countNames);
 }
 
 void Register()
 {
+  printf("\t\tNumber of Tickets: ");
+  scanf("%d", &numTickets);
+  for(i=1; i<=numTickets; i++){
+    printf("\n\t\tName for Ticket %d: ", i);
+    scanf("%s", resName);
+    BusFileWrite();
+  }
+}
 
+void BusFileWrite()
+{
+    FILE *fp, *fopen();
+    switch (dec) {
+
+        case 1:
+        fp = fopen("name1.txt","a");
+        fprintf(fp,"%s ", resName);
+        fclose(fp);
+        break;
+
+        case 2:
+         fp = fopen("name2.txt","a");
+         fprintf(fp,"%s ", resName);
+         fclose(fp);
+         break;
+
+        case 3:
+         fp = fopen("name3.txt","a");
+         fprintf(fp,"%s ", resName);;
+         fclose(fp);
+         break;
+
+        case 4:
+         fp = fopen("name4.txt","a");
+         fprintf(fp,"%s ", resName);
+         fclose(fp);
+         break;
+
+        case 5:
+         fp = fopen("name5.txt","a");
+         fprintf(fp,"%s ", resName);
+         fclose(fp);
+         break;
+        }
 }
 
 void LogIn() {
