@@ -186,11 +186,14 @@ void BusStatus()
 void BusSeats()
 {
       for(i=1; i<=32; i++){
-      if(i % 4 == 0){
-        printf("%d.%s\n", i, list[i-1]);
+      if(i % 4 == 0 && i<= countNames){
+        printf("%d.%s\n", i, nameSplit[i-1]);
       }
         else if(i<=countNames){
             printf("%d.%s\t", i, nameSplit[i-1]);
+        }
+        else if(i % 4 == 0 && i>countNames){
+          printf("%d.%s\n", i, list[i-1]);
         }
         else{
             printf("%d.%s\t", i, list[i-1]); /* idk */
