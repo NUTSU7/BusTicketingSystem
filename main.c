@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 // Functions
+// TODO: make function names more descriptive
 void bus_list();
 void book_ticket();
 void cancel_ticket();
@@ -12,7 +13,7 @@ void bus_file_read();
 void bus_file_write();
 void split_names();
 void bus_seats();
-void list();
+void list_bus();
 void _register();
 void log_in();
 
@@ -35,7 +36,7 @@ int main()
   log_in();
 }
 
-void list()
+void list_bus()
 {
     printf("Bus Ticket System\n\n1. Bus List\n2. Book Tickets\n3. Cancel a Booked Ticket\n4. Bus Status\n5. Exit\n");
     printf("\nEnter your choice:");
@@ -78,7 +79,7 @@ void bus_list()
     printf("Going back in 1s\n");
     sleep(1);
     printf("\n\n");
-    list();
+    list_bus();
 
 }
 
@@ -110,7 +111,7 @@ void bus_status()
     printf("Going back in 1s\n");
     sleep(1);
     printf("\n\n");
-    list();
+    list_bus();
 }
 
 void bus_file_read()
@@ -255,7 +256,7 @@ void log_in() {
       if(strcmp(pass_input,pass) == 0){
           printf("Ok, now you have acces to the system, enjoy!\n\n\n");
           printf("Welcome to the Bus Ticket System, chose the options from below:\n\n");
-          list();
+          list_bus();
       }
 
       else
