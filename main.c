@@ -13,7 +13,8 @@ void bus_file_read();
 void bus_file_write();
 void split_names();
 void bus_seats();
-void list_bus();
+int list_bus();
+void list_bus_wrapper(int choice);
 void _register();
 void log_in();
 
@@ -36,38 +37,44 @@ int main()
   log_in();
 }
 
-void list_bus()
+int list_bus()
 {
+	int choice = 0;
     printf("Bus Ticket System\n\n1. Bus List\n2. Book Tickets\n3. Cancel a Booked Ticket\n4. Bus Status\n5. Exit\n");
     printf("\nEnter your choice:");
-    scanf("%d", &dec);
+    scanf("%d", &choice);
     printf("\n\n");
 
-    switch(dec) {
-
-        case 1:
-         bus_list();
-         break;
-
-        case 2:
-         book_ticket();
-         break;
-
-        case 3:
-         cancel_ticket();
-         break;
+	return choice;
+}
 
 
-        case 4:
-         bus_status();
-         break;
-
-
-        case 5:
-         exit;
-         printf("\n\n");
-         break;
-    }
+void list_bus_wrapper(int choice)
+{
+	switch(choice) {
+		case 1:
+			bus_list();
+			break;
+			
+		case 2:
+			book_ticket();
+			break;
+			
+		case 3:
+			cancel_ticket();
+			break;
+			
+			
+		case 4:
+			bus_status();
+			break;
+			
+			
+		case 5:
+			exit;
+			printf("\n\n");
+			break;
+	}
 }
 
 
@@ -79,7 +86,7 @@ void bus_list()
     printf("Going back in 1s\n");
     sleep(1);
     printf("\n\n");
-    list_bus();
+    list_bus_wrapper(list_bus());
 
 }
 
@@ -111,7 +118,7 @@ void bus_status()
     printf("Going back in 1s\n");
     sleep(1);
     printf("\n\n");
-    list_bus();
+    list_bus_wrapper(list_bus());
 }
 
 void bus_file_read()
@@ -256,7 +263,7 @@ void log_in() {
       if(strcmp(pass_input,pass) == 0){
           printf("Ok, now you have acces to the system, enjoy!\n\n\n");
           printf("Welcome to the Bus Ticket System, chose the options from below:\n\n");
-          list_bus();
+          list_bus_wrapper(list_bus());
       }
 
       else
