@@ -21,12 +21,12 @@ const char login[] = "user", pass[] = "pass"; // login verifier
 char login_input[] = "user", pass_input[] = "pass"; // pass
 char list[32][10]={"Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty", "Empty "};
 int dec; // decisions
-char name[200]; // name string taken from file
+char name[200];
 char nameSplit[32][10]; // name string splitted into array elements so u can print it
-int cnt=0; // used for spliting the strings
-int j=0;
+int cnt; // used for spliting the strings
+int j;
 int i;
-int countNames=0;
+int countNames;
 int numTickets;
 char resName[100];
 
@@ -85,7 +85,6 @@ void BusList()
 void Book()
 {
     BusFileRead();
-    SplitNames();
     BusSeats();
     Register();
 //    BusList();
@@ -99,7 +98,6 @@ void CancelT()
 void BusStatus()
 {
     BusFileRead();
-    SplitNames();
     BusSeats();
     printf("\n\nGoing back in 5s\n");
     sleep(2);
@@ -115,6 +113,7 @@ void BusStatus()
 
 void BusFileRead()
 {
+  char nameLocal[200];
     FILE *fp, *fopen();
 
     printf("1. Cardiff Express\n2. Delfast Express\n3. Derby Express\n4. Chester Expres\n5. Newport Express\n\n\n");
@@ -126,38 +125,46 @@ void BusFileRead()
 
         case 1:
         fp = fopen("name1.txt","r+");
-        fgets(name,200,fp);
+        fgets(nameLocal,200,fp);
         fclose(fp);
+        name=nameLocal;
         break;
 
         case 2:
          fp = fopen("name2.txt","r+");
-         fgets(name,200,fp);
+         fgets(nameLocal,200,fp);
          fclose(fp);
+         name=nameLocal;
          break;
 
         case 3:
          fp = fopen("name3.txt","r+");
-         fgets(name,200,fp);
+         fgets(nameLocal,200,fp);
          fclose(fp);
+         name=nameLocal;
          break;
 
         case 4:
          fp = fopen("name4.txt","r+");
-         fgets(name,200,fp);
+         fgets(nameLocal,200,fp);
          fclose(fp);
+         name=nameLocal;
          break;
 
         case 5:
          fp = fopen("name5.txt","r+");
-         fgets(name,200,fp);
+         fgets(nameLocal,200,fp);
          fclose(fp);
+         name=nameLocal;
          break;
         }
 }
 
 void SplitNames()
 {
+  cnt=0;
+  countNames=0;
+  j=0;
   for(i=0;i<=(strlen(name));i++)
       {
           // if space or NULL found, assign NULL into splitStrings[cnt]
@@ -177,6 +184,7 @@ void SplitNames()
 
 void BusSeats()
 {
+  SplitNames();
   countNames=cnt-1;
       for(i=1; i<=32; i++){
       if(i % 4 == 0 && i<= countNames){
@@ -213,32 +221,32 @@ void BusFileWrite()
     switch (dec) {
 
         case 1:
-        fp = fopen("name1.txt","a");
-        fprintf(fp,"%s ", resName);
-        fclose(fp);
-        break;
+         fp = fopen("name1.txt","a");
+         fprintf(fp,"\b%s ", resName);
+         fclose(fp);
+         break;
 
         case 2:
          fp = fopen("name2.txt","a");
-         fprintf(fp,"%s ", resName);
+         fprintf(fp,"\b%s ", resName);
          fclose(fp);
          break;
 
         case 3:
          fp = fopen("name3.txt","a");
-         fprintf(fp,"%s ", resName);;
+         fprintf(fp,"\b%s ", resName);;
          fclose(fp);
          break;
 
         case 4:
          fp = fopen("name4.txt","a");
-         fprintf(fp,"%s ", resName);
+         fprintf(fp,"\b%s ", resName);
          fclose(fp);
          break;
 
         case 5:
          fp = fopen("name5.txt","a");
-         fprintf(fp,"%s ", resName);
+         fprintf(fp,"\b%s ", resName);
          fclose(fp);
          break;
         }
