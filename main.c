@@ -14,7 +14,7 @@ void bus_file_write();
 void split_names();
 void bus_seats();
 int list_bus();
-void list_bus_wrapper(int choice);
+void list_bus_wrapper();
 void _register();
 void log_in();
 
@@ -31,6 +31,7 @@ int i;
 int count_names=0;
 int num_tickets;
 char res_name[100];
+int choice;
 
 int main()
 {
@@ -39,7 +40,6 @@ int main()
 
 int list_bus()
 {
-	int choice = 0;
     printf("Bus Ticket System\n\n1. Bus List\n2. Book Tickets\n3. Cancel a Booked Ticket\n4. Bus Status\n5. Exit\n");
     printf("\nEnter your choice:");
     scanf("%d", &choice);
@@ -49,27 +49,27 @@ int list_bus()
 }
 
 
-void list_bus_wrapper(int choice)
+void list_bus_wrapper()
 {
 	switch(choice) {
 		case 1:
 			bus_list();
 			break;
-			
+
 		case 2:
 			book_ticket();
 			break;
-			
+
 		case 3:
 			cancel_ticket();
 			break;
-			
-			
+
+
 		case 4:
 			bus_status();
 			break;
-			
-			
+
+
 		case 5:
 			exit;
 			printf("\n\n");
@@ -137,35 +137,35 @@ void bus_file_read()
         fp = fopen("name1.txt","r+");
         fgets(name_local,200,fp);
         fclose(fp);
-        name=name_local;
+        strcpy(name, name_local);
         break;
 
         case 2:
          fp = fopen("name2.txt","r+");
          fgets(name_local,200,fp);
          fclose(fp);
-         name=name_local;
+         strcpy(name, name_local);
          break;
 
         case 3:
          fp = fopen("name3.txt","r+");
          fgets(name_local,200,fp);
          fclose(fp);
-         name=name_local;
+         strcpy(name, name_local);
          break;
 
         case 4:
          fp = fopen("name4.txt","r+");
          fgets(name_local,200,fp);
          fclose(fp);
-         name=name_local;
+         strcpy(name, name_local);
          break;
 
         case 5:
          fp = fopen("name5.txt","r+");
          fgets(name_local,200,fp);
          fclose(fp);
-         name=name_local;
+         strcpy(name, name_local);
          break;
         }
 }
@@ -173,7 +173,6 @@ void bus_file_read()
 void split_names()
 {
   cnt=0;
-  countNames=0;
   j=0;
   for(i=0;i<=(strlen(name));i++)
       {
