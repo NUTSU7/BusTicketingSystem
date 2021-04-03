@@ -4,17 +4,17 @@
 #include <unistd.h>
 
 // Functions
-void BusList();
-void Book();
-void CancelT();
-void BusStatus();
-void BusFileRead();
-void BusFileWrite();
-void SplitNames();
-void BusSeats();
-void List();
-void Register();
-void LogIn();
+void bus_list();
+void book_ticket();
+void cancel_ticket();
+void bus_status();
+void bus_file_read();
+void bus_file_write();
+void split_names();
+void bus_seats();
+void list();
+void register();
+void log_in();
 
 // Variables
 const char login[] = "user", pass[] = "pass"; // login verifier
@@ -22,20 +22,20 @@ char login_input[] = "user", pass_input[] = "pass"; // pass
 char list[32][10]={"Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty", "Empty "};
 int dec; // decisions
 char name[200]; // name string taken from file
-char nameSplit[32][10]; // name string splitted into array elements so u can print it
+char name_split[32][10]; // name string splitted into array elements so u can print it
 int cnt=0; // used for spliting the strings
 int j=0;
 int i;
-int countNames=0;
-int numTickets;
-char resName[100];
+int count_names=0;
+int num_tickets;
+char res_name[100];
 
 int main()
 {
-  LogIn();
+  log_in();
 }
 
-void List()
+void list()
 {
     printf("Bus Ticket System\n\n1. Bus List\n2. Book Tickets\n3. Cancel a Booked Ticket\n4. Bus Status\n5. Exit\n");
     printf("\nEnter your choice:");
@@ -45,20 +45,20 @@ void List()
     switch(dec) {
 
         case 1:
-         BusList();
+         bus_list();
          break;
 
         case 2:
-         Book();
+         book_ticket();
          break;
 
         case 3:
-         CancelT();
+         cancel_ticket();
          break;
 
 
         case 4:
-         BusStatus();
+         bus_status();
          break;
 
 
@@ -70,7 +70,7 @@ void List()
 }
 
 
-void BusList()
+void bus_list()
 {
     printf("\n\n1. Cardiff Express\n2. Delfast Express\n3. Derby Express\n4. Chester Expres\n5. Newport Express\n\n\n");
     printf("Going back in 2s\n");
@@ -78,29 +78,29 @@ void BusList()
     printf("Going back in 1s\n");
     sleep(1);
     printf("\n\n");
-    List();
+    list();
 
 }
 
-void Book()
+void book_ticket()
 {
-    BusFileRead();
-    SplitNames();
-    BusSeats();
-    Register();
-//    BusList();
+    bus_file_read();
+    split_names();
+    bus_seats();
+    register();
+//    bus_list();
 }
 
-void CancelT()
+void cancel_ticket()
 {
     printf("Under Construction\n");
 }
 
-void BusStatus()
+void bus_status()
 {
-    BusFileRead();
-    SplitNames();
-    BusSeats();
+    bus_file_read();
+    split_names();
+    bus_seats();
     printf("\n\nGoing back in 5s\n");
     sleep(2);
     printf("Going back in 3s\n");
@@ -110,10 +110,10 @@ void BusStatus()
     printf("Going back in 1s\n");
     sleep(1);
     printf("\n\n");
-    List();
+    list();
 }
 
-void BusFileRead()
+void bus_file_read()
 {
     FILE *fp, *fopen();
 
@@ -156,36 +156,36 @@ void BusFileRead()
         }
 }
 
-void SplitNames()
+void split_names()
 {
   for(i=0;i<=(strlen(name));i++)
       {
           // if space or NULL found, assign NULL into splitStrings[cnt]
           if(name[i]=='\0'||name[i]==' ')
           {
-//              nameSplit[cnt][j]='';
+//              name_split[cnt][j]='';
               cnt++;  //for next word
               j=0;    //for next word, init index to 0
           }
           else
           {
-              nameSplit[cnt][j]=name[i];
+              name_split[cnt][j]=name[i];
               j++;
           }
       }
 }
 
-void BusSeats()
+void bus_seats()
 {
-  countNames=cnt-1;
+  count_names=cnt-1;
       for(i=1; i<=32; i++){
-      if(i % 4 == 0 && i<= countNames){
-        printf("%d.%s\n", i, nameSplit[i-1]);
+      if(i % 4 == 0 && i<= count_names){
+        printf("%d.%s\n", i, name_split[i-1]);
       }
         else if(i<cnt){
-            printf("%d.%s\t", i, nameSplit[i-1]);
+            printf("%d.%s\t", i, name_split[i-1]);
         }
-        else if(i % 4 == 0 && i>countNames){
+        else if(i % 4 == 0 && i>count_names){
           printf("%d.%s\n", i, list[i-1]);
         }
         else{
@@ -193,58 +193,58 @@ void BusSeats()
           }
 
 }
-    printf("\n\n\n\t\tAvailable Seats:%d\n",32-countNames);
+    printf("\n\n\n\t\tAvailable Seats:%d\n",32-count_names);
 }
 
-void Register()
+void register()
 {
   printf("\t\tNumber of Tickets: ");
-  scanf("%d", &numTickets);
-  for(i=1; i<=numTickets; i++){
+  scanf("%d", &num_tickets);
+  for(i=1; i<=num_tickets; i++){
     printf("\n\t\tName for Ticket %d: ", i);
-    scanf("%s", resName);
-    BusFileWrite();
+    scanf("%s", res_name);
+    bus_file_write();
   }
 }
 
-void BusFileWrite()
+void bus_file_write()
 {
     FILE *fp, *fopen();
     switch (dec) {
 
         case 1:
         fp = fopen("name1.txt","a");
-        fprintf(fp,"%s ", resName);
+        fprintf(fp,"%s ", res_name);
         fclose(fp);
         break;
 
         case 2:
          fp = fopen("name2.txt","a");
-         fprintf(fp,"%s ", resName);
+         fprintf(fp,"%s ", res_name);
          fclose(fp);
          break;
 
         case 3:
          fp = fopen("name3.txt","a");
-         fprintf(fp,"%s ", resName);;
+         fprintf(fp,"%s ", res_name);;
          fclose(fp);
          break;
 
         case 4:
          fp = fopen("name4.txt","a");
-         fprintf(fp,"%s ", resName);
+         fprintf(fp,"%s ", res_name);
          fclose(fp);
          break;
 
         case 5:
          fp = fopen("name5.txt","a");
-         fprintf(fp,"%s ", resName);
+         fprintf(fp,"%s ", res_name);
          fclose(fp);
          break;
         }
 }
 
-void LogIn() {
+void log_in() {
   printf("Username:\n");
   scanf("%s", login_input);
 
@@ -255,7 +255,7 @@ void LogIn() {
       if(strcmp(pass_input,pass) == 0){
           printf("Ok, now you have acces to the system, enjoy!\n\n\n");
           printf("Welcome to the Bus Ticket System, chose the options from below:\n\n");
-          List();
+          list();
       }
 
       else
