@@ -13,7 +13,7 @@ void bus_file_write();
 void split_names();
 void bus_seats();
 void list();
-void register();
+void _register();
 void log_in();
 
 // Variables
@@ -87,7 +87,7 @@ void book_ticket()
     bus_file_read();
     split_names();
     bus_seats();
-    register();
+    _register();
 //    bus_list();
 }
 
@@ -196,7 +196,7 @@ void bus_seats()
     printf("\n\n\n\t\tAvailable Seats:%d\n",32-count_names);
 }
 
-void register()
+void _register()
 {
   printf("\t\tNumber of Tickets: ");
   scanf("%d", &num_tickets);
