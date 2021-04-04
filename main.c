@@ -12,9 +12,9 @@ void bus_status();
 void bus_file_read();
 void bus_file_write();
 void split_names();
-void bus_seats();
-int list_bus();
-void list_bus_wrapper();
+void bus_seats_print();
+int main_func_list();
+void main_func_list_wrapper();
 void _register();
 void log_in();
 void print_bus_list();
@@ -22,7 +22,6 @@ void print_bus_list();
 // Variables
 const char login[] = "user", pass[] = "pass"; // login verifier
 char login_input[] = "user", pass_input[] = "pass"; // pass
-char list[32][10]={"Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty", "Empty "};
 int dec; // decisions
 char name[200]; // name string taken from file
 char name_split[32][10]; // name string splitted into array elements so u can print it
@@ -40,7 +39,7 @@ int main()
   log_in();
 }
 
-int list_bus()
+int main_func_list()
 {
   printf("\t\t\tBus Ticketing System\n\n");
   printf("\t\t\t1. Bus List\n\t\t\t2. Book Tickets\n\t\t\t3. Cancel a Booked Ticket\n\t\t\t4. Bus Status\n\t\t\t5. Exit\n\t\t\t");
@@ -51,7 +50,7 @@ int list_bus()
 }
 
 
-void list_bus_wrapper()
+void main_func_list_wrapper()
 {
 	switch(choice) {
 		case 1:
@@ -88,7 +87,7 @@ void bus_list()
     sleep(1);
   }
   printf("\n\n");
-  list_bus_wrapper(list_bus());
+  main_func_list_wrapper(main_func_list());
 
 }
 
@@ -96,7 +95,7 @@ void book_ticket()
 {
     bus_file_read();
     split_names();
-    bus_seats();
+    bus_seats_print();
     _register();
 //    bus_list();
 }
@@ -110,13 +109,13 @@ void bus_status()
 {
     bus_file_read();
     split_names();
-    bus_seats();
+    bus_seats_print();
     for(i=3; i>=1; i--){
       printf("\n\t\t\tGoing back in %ds\n", i);
       sleep(1);
     }
     printf("\n\n");
-    list_bus_wrapper(list_bus());
+    main_func_list_wrapper(main_func_list());
 }
 
 void print_bus_list(){
@@ -192,36 +191,68 @@ void split_names()
               j++;
           }
       }
+//      for(i=0; i<5; i++){
+//        if(strlen(name_split[i]) < 5){
+//          for(j=1; i<strlen(name_split[i]); j++){
+//          name_split[i][strlen(name_split[i])+1] ='\0';
+//        }
+//        }
+//      }
 }
 
-void bus_seats()
+void bus_seats_print()
 {
   count_names=cnt-1;
+  char list[32][10]={"Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ", "Empty "};
+  for(i=0; i<count_names; i++)
+  {
+      strcpy(list[i],name_split[i]);
+  }
+  size_t len;
       for(i=1; i<=32; i++){
-      if(i % 4 == 0 && i<= count_names){
+//        len = strlen(list[i-1]);
+/*      if(i % 4 == 0 && i<= count_names){
         printf("%d.%s\n", i, name_split[i-1]);
       }
         else if(i<cnt){
             printf("%d.%s\t\t", i, name_split[i-1]);
+        } */
+        if(i == 1){
+          printf("\t%d.%s\t", i, list[i-1]);
+        }
+        else if(len == 4){
+          printf("%d.%s  \t", i, list[i-1]);
+        }
+        else if(len == 4 && i % 4 == 0){
+          printf("%d.%s  \n\t", i, list[i-1]);
+        }
+        else if(len == 5){
+          printf("%d.%s \t", i, list[i-1]);
+        }
+        else if(len == 5 && i % 4 == 0){
+          printf("%d.%s \n\t", i, list[i-1]);
         }
         else if(i % 4 == 0 && i>count_names){
-          printf("%d.%s\n", i, list[i-1]);
+          printf("%d.%s\n\t", i, list[i-1]);
         }
         else{
-            printf("%d.%s\t\t", i, list[i-1]); /* idk */
+            printf("%d.%s\t", i, list[i-1]); /* idk */
           }
-
 }
     printf("\n\n\n\t\t\tAvailable Seats:%d\n",32-count_names);
 }
 
 void _register()
 {
-  printf("\t\tNumber of Tickets: ");
+  printf("\t\t\tNumber of Tickets: ");
   scanf("%d", &num_tickets);
   for(i=1; i<=num_tickets; i++){
-    printf("\n\t\tName for Ticket %d: ", i);
+    printf("\n\tName for Ticket(No longer than 5 letters) %d: ", i);
     scanf("%s", res_name);
+    if(strlen(res_name) > 5){
+      printf("Invalid name");
+    }
+    else
     bus_file_write();
   }
 }
@@ -274,7 +305,7 @@ void log_in() {
     if(strcmp(pass_input,pass) == 0){
       printf("\t\tOk, now you have acces to the system, enjoy!\n");
       printf("\tWelcome to the Bus Ticket System, chose the options from below:\n\n");
-      list_bus_wrapper(list_bus());
+      main_func_list_wrapper(main_func_list());
     }
     else
     printf("Incorrect PASSWORD\n");
