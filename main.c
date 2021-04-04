@@ -17,6 +17,7 @@ int list_bus();
 void list_bus_wrapper();
 void _register();
 void log_in();
+void print_bus_list();
 
 // Variables
 const char login[] = "user", pass[] = "pass"; // login verifier
@@ -32,6 +33,7 @@ int count_names=0;
 int num_tickets;
 char res_name[100];
 int choice;
+char bus_list_5[5][20] = {"Cardiff Express", "Delfast Express", "Derby Express", "Chester Express", "Newport Express"};
 
 int main()
 {
@@ -40,12 +42,12 @@ int main()
 
 int list_bus()
 {
-    printf("Bus Ticket System\n\n1. Bus List\n2. Book Tickets\n3. Cancel a Booked Ticket\n4. Bus Status\n5. Exit\n");
-    printf("\nEnter your choice:");
-    scanf("%d", &choice);
-    printf("\n\n");
-
-	return choice;
+  printf("\t\t\tBus Ticketing System\n\n");
+  printf("\t\t\t1. Bus List\n\t\t\t2. Book Tickets\n\t\t\t3. Cancel a Booked Ticket\n\t\t\t4. Bus Status\n\t\t\t5. Exit\n\t\t\t");
+  printf("\n\t\t\tEnter your choice:");
+  scanf("%d", &choice);
+  printf("\n\n");
+  return choice;
 }
 
 
@@ -80,13 +82,13 @@ void list_bus_wrapper()
 
 void bus_list()
 {
-    printf("\n\n1. Cardiff Express\n2. Delfast Express\n3. Derby Express\n4. Chester Expres\n5. Newport Express\n\n\n");
-    printf("Going back in 2s\n");
+  print_bus_list();
+  for(i=2; i>=1; i--){
+    printf("\n\t\t\tGoing back in %ds\n", i);
     sleep(1);
-    printf("Going back in 1s\n");
-    sleep(1);
-    printf("\n\n");
-    list_bus_wrapper(list_bus());
+  }
+  printf("\n\n");
+  list_bus_wrapper(list_bus());
 
 }
 
@@ -109,25 +111,26 @@ void bus_status()
     bus_file_read();
     split_names();
     bus_seats();
-    printf("\n\nGoing back in 5s\n");
-    sleep(2);
-    printf("Going back in 3s\n");
-    sleep(1);
-    printf("Going back in 2s\n");
-    sleep(1);
-    printf("Going back in 1s\n");
-    sleep(1);
+    for(i=3; i>=1; i--){
+      printf("\n\t\t\tGoing back in %ds\n", i);
+      sleep(1);
+    }
     printf("\n\n");
     list_bus_wrapper(list_bus());
 }
 
+void print_bus_list(){
+  for(i=0; i<5; i++){
+    printf("\t\t\t%d.%s\n", i+1, bus_list_5[i]);
+  }
+}
 void bus_file_read()
 {
   char name_local[200];
     FILE *fp, *fopen();
 
-    printf("1. Cardiff Express\n2. Delfast Express\n3. Derby Express\n4. Chester Expres\n5. Newport Express\n\n\n");
-    printf("Enter your choice: ");
+    print_bus_list();
+    printf("\n\t\t\tEnter your choice:");
     scanf("%d", &dec);
     printf("\n\n");
 
@@ -199,17 +202,17 @@ void bus_seats()
         printf("%d.%s\n", i, name_split[i-1]);
       }
         else if(i<cnt){
-            printf("%d.%s\t", i, name_split[i-1]);
+            printf("%d.%s\t\t", i, name_split[i-1]);
         }
         else if(i % 4 == 0 && i>count_names){
           printf("%d.%s\n", i, list[i-1]);
         }
         else{
-            printf("%d.%s\t", i, list[i-1]); /* idk */
+            printf("%d.%s\t\t", i, list[i-1]); /* idk */
           }
 
 }
-    printf("\n\n\n\t\tAvailable Seats:%d\n",32-count_names);
+    printf("\n\n\n\t\t\tAvailable Seats:%d\n",32-count_names);
 }
 
 void _register()
@@ -261,22 +264,21 @@ void bus_file_write()
 }
 
 void log_in() {
-  printf("Username:\n");
+  printf("\t\t\tUSERNAME - ");
   scanf("%s", login_input);
-
+  printf("\n");
+  printf("\t\t\tPASSWORD - ");
+  scanf("%s", pass_input);
+  printf("\n");
   if (strcmp(login_input,login) == 0){
-      printf("Pass:\n");
-      scanf("%s", pass_input);
-
-      if(strcmp(pass_input,pass) == 0){
-          printf("Ok, now you have acces to the system, enjoy!\n\n\n");
-          printf("Welcome to the Bus Ticket System, chose the options from below:\n\n");
-          list_bus_wrapper(list_bus());
-      }
-
-      else
-          printf("Incorrect Pass\n");
+    if(strcmp(pass_input,pass) == 0){
+      printf("\t\tOk, now you have acces to the system, enjoy!\n");
+      printf("\tWelcome to the Bus Ticket System, chose the options from below:\n\n");
+      list_bus_wrapper(list_bus());
+    }
+    else
+    printf("Incorrect PASSWORD\n");
   }
   else
-      printf("Seems like you dont have acces\n");
+  printf("Incorrect USERNAME\n");
 }
