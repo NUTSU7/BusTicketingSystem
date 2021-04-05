@@ -127,7 +127,6 @@ void bus_file_read()
 {
   char name_local[200];
     FILE *fp, *fopen();
-
     print_bus_list();
     printf("\n\t\t\tEnter your choice:");
     scanf("%d", &dec);
@@ -188,10 +187,35 @@ void split_names()
               name_split[cnt][j]=name[i];
               j++;
           }
+//          name_split[cnt][j]='\0';
       }
-      name_split[cnt][j]='\0';
-}
+      // attemp to fix not good formatting for names that are made up from 4 or less chars
+/*      int len;
 
+      for(i=0; i<cnt-1; i++){
+        len = strlen(name_split[i]);
+        switch (len) {
+          case 1:
+          for(j=5; j<len; j--){
+            name_split[i][j]='\0';
+          }
+          case 2:
+          for(j=5; j<len; j--){
+            name_split[i][j]='\0';
+          }
+
+          case 3:
+          for(j=5; j<len; j--){
+            name_split[i][j]='\0';
+          }
+
+          case 4:
+          for(j=5; j<len; j--){
+            name_split[i][j]='\0';
+          }
+        }
+      } */
+}
 void bus_seats_print()
 {
   count_names=cnt-1;
