@@ -181,7 +181,6 @@ void split_names()
           // if space or NULL found, assign NULL into splitStrings[cnt]
           if(name[i]=='\0'||name[i]==' ')
           {
-//              name_split[cnt][j]='';
               cnt++;  //for next word
               j=0;    //for next word, init index to 0
           }
@@ -191,6 +190,7 @@ void split_names()
               j++;
           }
       }
+      name_split[cnt][j]='\0';
 //      for(i=0; i<5; i++){
 //        if(strlen(name_split[i]) < 5){
 //          for(j=1; i<strlen(name_split[i]); j++){
@@ -217,10 +217,10 @@ void bus_seats_print()
         else if(i<cnt){
             printf("%d.%s\t\t", i, name_split[i-1]);
         } */
-        if(i == 1){
-          printf("\t%d.%s\t", i, list[i-1]);
-        }
-        else if(len == 4){
+//        if(i == 1){
+//          printf("\t%d.%s\t", i, list[i-1]);
+//        }
+/*        else if(len == 4){
           printf("%d.%s  \t", i, list[i-1]);
         }
         else if(len == 4 && i % 4 == 0){
@@ -230,13 +230,13 @@ void bus_seats_print()
           printf("%d.%s \t", i, list[i-1]);
         }
         else if(len == 5 && i % 4 == 0){
-          printf("%d.%s \n\t", i, list[i-1]);
-        }
-        else if(i % 4 == 0 && i>count_names){
-          printf("%d.%s\n\t", i, list[i-1]);
+          printf("%d.%s \n\t", i, list[i-1]); */
+      //  }
+        if(i % 4 == 0){
+          printf("%d.%s \n", i, list[i-1]);
         }
         else{
-            printf("%d.%s\t", i, list[i-1]); /* idk */
+            printf("%d.%s \t", i, list[i-1]); /* idk */
           }
 }
     printf("\n\n\n\t\t\tAvailable Seats:%d\n",32-count_names);
@@ -249,7 +249,7 @@ void _register()
   for(i=1; i<=num_tickets; i++){
     printf("\n\tName for Ticket(No longer than 5 letters) %d: ", i);
     scanf("%s", res_name);
-    if(strlen(res_name) > 5){
+    if(strlen(res_name) > 6){
       printf("Invalid name");
     }
     else
