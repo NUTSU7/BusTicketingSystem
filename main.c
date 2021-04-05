@@ -178,11 +178,10 @@ void split_names()
   j=0;
   for(i=0;i<=(strlen(name));i++)
       {
-          // if space or NULL found, assign NULL into splitStrings[cnt]
           if(name[i]=='\0'||name[i]==' ')
           {
-              cnt++;  //for next word
-              j=0;    //for next word, init index to 0
+              cnt++;
+              j=0;
           }
           else
           {
@@ -191,13 +190,6 @@ void split_names()
           }
       }
       name_split[cnt][j]='\0';
-//      for(i=0; i<5; i++){
-//        if(strlen(name_split[i]) < 5){
-//          for(j=1; i<strlen(name_split[i]); j++){
-//          name_split[i][strlen(name_split[i])+1] ='\0';
-//        }
-//        }
-//      }
 }
 
 void bus_seats_print()
@@ -208,30 +200,7 @@ void bus_seats_print()
   {
       strcpy(list[i],name_split[i]);
   }
-  size_t len;
       for(i=1; i<=32; i++){
-//        len = strlen(list[i-1]);
-/*      if(i % 4 == 0 && i<= count_names){
-        printf("%d.%s\n", i, name_split[i-1]);
-      }
-        else if(i<cnt){
-            printf("%d.%s\t\t", i, name_split[i-1]);
-        } */
-//        if(i == 1){
-//          printf("\t%d.%s\t", i, list[i-1]);
-//        }
-/*        else if(len == 4){
-          printf("%d.%s  \t", i, list[i-1]);
-        }
-        else if(len == 4 && i % 4 == 0){
-          printf("%d.%s  \n\t", i, list[i-1]);
-        }
-        else if(len == 5){
-          printf("%d.%s \t", i, list[i-1]);
-        }
-        else if(len == 5 && i % 4 == 0){
-          printf("%d.%s \n\t", i, list[i-1]); */
-      //  }
         if(i % 4 == 0){
           printf("%d.%s \n", i, list[i-1]);
         }
