@@ -219,8 +219,9 @@ void split_names()
 void bus_seats_print()
 {
   count_names=cnt-1;
-  char list[32][10]={"Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty",
-  "Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty", "Empty"};
+  char *list[32];
+  for (i=0; i < 32; i++)
+	  list[i] = "Empty";
   for(i=0; i<count_names; i++)
   {
       strcpy(list[i],name_split[i]);
