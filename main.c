@@ -219,17 +219,18 @@ void split_names()
 void bus_seats_print()
 {
   count_names=cnt-1;
-  char list[32][10]={"Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ","Empty ", "Empty "};
+  char list[32][10]={"Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty",
+  "Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty", "Empty"};
   for(i=0; i<count_names; i++)
   {
       strcpy(list[i],name_split[i]);
   }
       for(i=1; i<=32; i++){
         if(i % 4 == 0){
-          printf("%d.%s \n", i, list[i-1]);
+          printf(" %d.%s \n", i, list[i-1]);
         }
         else{
-            printf("%d.%s \t", i, list[i-1]); /* idk */
+            printf(" %d.%s \t", i, list[i-1]); /* idk */
           }
 }
     printf("\n\n\n\t\t\tAvailable Seats:%d\n",32-count_names);
