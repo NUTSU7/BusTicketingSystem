@@ -15,6 +15,7 @@ void split_names();
 void bus_seats_print();
 int main_func_list();
 void main_func_list_wrapper();
+void _register_1st_part();
 void _register();
 void log_in();
 void print_bus_list();
@@ -33,6 +34,7 @@ int num_tickets;
 char res_name[100];
 int choice;
 char bus_list_5[5][20] = {"Cardiff Express", "Delfast Express", "Derby Express", "Chester Express", "Newport Express"};
+int free_seats;
 
 int main()
 {
@@ -96,13 +98,19 @@ void book_ticket()
     bus_file_read();
     split_names();
     bus_seats_print();
+    _register_1st_part();
     _register();
-//    bus_list();
+    main_func_list_wrapper(main_func_list());
 }
 
 void cancel_ticket()
 {
-    printf("Under Construction\n");
+    printf("\t\t\tUnder Construction\n");
+    for(i=3; i>=1; i--){
+      printf("\n\t\t\tGoing back in %ds\n", i);
+      sleep(1);
+    }
+    main_func_list_wrapper(main_func_list());
 }
 
 void bus_status()
@@ -187,69 +195,67 @@ void split_names()
               name_split[cnt][j]=name[i];
               j++;
           }
-//          name_split[cnt][j]='\0';
       }
-      // attemp to fix not good formatting for names that are made up from 4 or less chars
-/*      int len;
-
-      for(i=0; i<cnt-1; i++){
-        len = strlen(name_split[i]);
-        switch (len) {
-          case 1:
-          for(j=5; j<len; j--){
-            name_split[i][j]='\0';
-          }
-          case 2:
-          for(j=5; j<len; j--){
-            name_split[i][j]='\0';
-          }
-
-          case 3:
-          for(j=5; j<len; j--){
-            name_split[i][j]='\0';
-          }
-
-          case 4:
-          for(j=5; j<len; j--){
-            name_split[i][j]='\0';
-          }
-        }
-      } */
 }
 void bus_seats_print()
 {
   count_names=cnt-1;
-  char *list[32];
-  for (i=0; i < 32; i++)
-	  list[i] = "Empty";
+  free_seats=32-count_names;
+  char list[32][10]={"Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty",
+  "Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty", "Empty"};
   for(i=0; i<count_names; i++)
   {
       strcpy(list[i],name_split[i]);
   }
+
       for(i=1; i<=32; i++){
         if(i % 4 == 0){
           printf(" %d.%s \n", i, list[i-1]);
         }
         else{
-            printf(" %d.%s \t", i, list[i-1]); /* idk */
+            printf(" %d.%s \t", i, list[i-1]);
           }
-}
-    printf("\n\n\n\t\t\tAvailable Seats:%d\n",32-count_names);
-}
+        }
+        printf("\n\n\n\t\t\tAvailable Seats:%d\n",free_seats);
+      }
 
-void _register()
-{
+void _register_1st_part(){
+  if(free_seats > 0 && free_seats <= 32){
   printf("\t\t\tNumber of Tickets: ");
   scanf("%d", &num_tickets);
+  _register();
+}
+else if(free_seats == 0){
+  printf("\n\t\t\tThere are no available seats\n\n\n");
+  main_func_list_wrapper(main_func_list());
+}
+}
+
+void _register(){
+  if(num_tickets <= free_seats && num_tickets > 0){
+  printf("\nRemember, your input name shouldn't be longer than 6 letters or smaller than 4");
   for(i=1; i<=num_tickets; i++){
-    printf("\n\tName for Ticket(No longer than 5 letters) %d: ", i);
+    printf("\n\t\t\tName for Ticket %d: ", i);
     scanf("%s", res_name);
-    if(strlen(res_name) > 6){
-      printf("Invalid name");
+    if(strlen(res_name) > 6 || strlen(res_name) < 4){
+      printf("\n\t\t\tInvalid name");
     }
     else
     bus_file_write();
+    }
+    for(i=3; i>=1; i--){
+      printf("\t\t\tGoing back in %ds\n", i);
+      sleep(1);
   }
+  main_func_list_wrapper(main_func_list());
+}
+else if(num_tickets == 0){
+  main_func_list_wrapper(main_func_list());
+}
+else{
+  printf("\t\t\t\nToo many seats\n\n");
+  _register_1st_part();
+}
 }
 
 void bus_file_write()
@@ -303,8 +309,8 @@ void log_in() {
       main_func_list_wrapper(main_func_list());
     }
     else
-    printf("Incorrect PASSWORD\n");
+    printf("\t\t\tIncorrect PASSWORD\n");
   }
   else
-  printf("Incorrect USERNAME\n");
+  printf("\t\t\tIncorrect USERNAME\n");
 }
