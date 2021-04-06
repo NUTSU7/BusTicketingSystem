@@ -297,10 +297,10 @@ void bus_file_write()
 
 void log_in() {
   printf("\t\t\tUSERNAME - ");
-  scanf("%s", login_input);
+  scanf("%16[^\n]%*c", login_input);
   printf("\n");
   printf("\t\t\tPASSWORD - ");
-  scanf("%s", pass_input);
+  scanf("%16[^\n]%*c", pass_input);
   printf("\n");
   if (strcmp(login_input,login) == 0){
     if(strcmp(pass_input,pass) == 0){
