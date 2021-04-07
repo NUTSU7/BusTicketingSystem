@@ -19,6 +19,9 @@ void _register_1st_part();
 void _register();
 void log_in();
 void print_bus_list();
+void cancel_ticket_print();
+void cancel_ticket_1stpart();
+void cancel_ticket_2ndpart();
 
 // Variables
 const char login[] = "user", pass[] = "pass"; // login verifier
@@ -35,6 +38,7 @@ char res_name[100];
 int choice;
 char bus_list_5[5][20] = {"Cardiff Express", "Delfast Express", "Derby Express", "Chester Express", "Newport Express"};
 int free_seats;
+int canceled_ticket[32];
 
 int main()
 {
@@ -105,12 +109,44 @@ void book_ticket()
 
 void cancel_ticket()
 {
-    printf("\t\t\tUnder Construction\n");
-    for(i=3; i>=1; i--){
-      printf("\n\t\t\tGoing back in %ds\n", i);
-      sleep(1);
+
+  bus_file_read();
+  split_names();
+  bus_seats_print();
+  cancel_ticket_1stpart();
+  cancel_ticket_2ndpart();
+}
+
+void cancel_ticket_1stpart(){
+  printf("\t\tNumber of Tickets you want to cancel-");
+  scanf("%d", &num_tickets);
+}
+
+void cancel_ticket_2ndpart(){
+  if (num_tickets <= count_names)
+  {
+    for (i = 0; i < num_tickets; i++)
+    {
+      printf("\n\n\t\t\tSeat Number-");
+      scanf("%d", &canceled_ticket[i]);
     }
-    main_func_list_wrapper(main_func_list());
+    for (i = 0; i < num_tickets; i++){
+      if (canceled_ticket[i] == 0)
+      {
+        main_func_list_wrapper(main_func_list());
+      }
+      else if (canceled_ticket[i] <= count_names)
+      {
+        cancel_ticket_print();
+      }
+      else{
+        cancel_ticket_2ndpart();
+      }
+    }
+  }
+  else
+    printf("\t\t\tWay to many seats to cancel");
+    cancel_ticket_1stpart();
 }
 
 void bus_status()
@@ -293,6 +329,86 @@ void bus_file_write()
          fclose(fp);
          break;
         }
+}
+
+void cancel_ticket_print(){
+  FILE *fp, *fopen();
+  j=0;
+  switch (dec)
+  {
+
+  case 1:
+    fp = fopen("name1.txt", "r+");
+    for(i=0; i<count_names; i++){
+      if(i+1 == canceled_ticket[j]){
+        fprintf(fp, "Empty ");
+        j++;
+      }
+      else
+        fprintf(fp, "%s ", name_split[i]);
+    }
+    fclose(fp);
+    main_func_list_wrapper(main_func_list());
+    break;
+
+  case 2:
+    fp = fopen("name2.txt", "r+");
+    for (i = 0; i < count_names; i++)
+    {
+      if (i+1 == canceled_ticket[j])
+      {
+        fprintf(fp, "Empty ");
+        j++;
+      }
+      else
+        fprintf(fp, "%s ", name_split[i]);
+    }
+    fclose(fp);
+    main_func_list_wrapper(main_func_list());
+    break;
+
+  case 3:
+    fp = fopen("name3.txt", "r+");
+    for(i=0; i<count_names; i++){
+      if(i+1 == canceled_ticket[j]){
+        fprintf(fp, "Empty ");
+        j++;
+      }
+      else
+        fprintf(fp, "%s ", name_split[i]);
+    }
+    fclose(fp);
+    main_func_list_wrapper(main_func_list());
+    break;
+
+  case 4:
+    fp = fopen("name4.txt", "r+");
+    for(i=0; i<count_names; i++){
+      if(i+1 == canceled_ticket[j]){
+        fprintf(fp, "Empty ");
+        j++;
+      }
+      else
+        fprintf(fp, "%s ", name_split[i]);
+    }
+    fclose(fp);
+    main_func_list_wrapper(main_func_list());
+    break;
+
+  case 5:
+    fp = fopen("name5.txt", "r+");
+    for(i=0; i<count_names; i++){
+      if(i+1 == canceled_ticket[j]){
+        fprintf(fp, "Empty ");
+        j++;
+      }
+      else
+        fprintf(fp, "%s ", name_split[i]);
+    }
+    fclose(fp);
+    main_func_list_wrapper(main_func_list());
+    break;
+  }
 }
 
 void log_in() {
