@@ -446,7 +446,7 @@ void cancel_ticket_print()
           }
           else if (seat_atoi[j] == canceled_ticket && seat_atoi[j] != 0)
           {
-            strcpy(name_split[j], "Empty");
+            strcpy(name_split[j], "Empty ");
           }
         }
       }
