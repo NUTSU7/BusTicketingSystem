@@ -431,7 +431,8 @@ void cancel_ticket_print()
                     }
                     else if (seat_atoi[j] == canceled_ticket && seat_atoi[j] != 0)
                     {
-                        strcpy(name_split[j], "Empty ");
+                        fprintf(fp, "Empty ");
+                        fprintf(fp2, "%d ", seat_atoi[j]);
                     }
                 }
             }
@@ -456,7 +457,8 @@ void cancel_ticket_print()
                     }
                     else if (seat_atoi[j] == canceled_ticket && seat_atoi[j] != 0)
                     {
-                        strcpy(name_split[j], "Empty");
+                        fprintf(fp, "Empty ");
+                        fprintf(fp2, "%d ", seat_atoi[j]);
                     }
                 }
             }
@@ -481,7 +483,8 @@ void cancel_ticket_print()
                     }
                     else if (seat_atoi[j] == canceled_ticket && seat_atoi[j] != 0)
                     {
-                        strcpy(name_split[j], "Empty");
+                        fprintf(fp, "Empty ");
+                        fprintf(fp2, "%d ", seat_atoi[j]);
                     }
                 }
             }
@@ -506,7 +509,8 @@ void cancel_ticket_print()
                     }
                     else if (seat_atoi[j] == canceled_ticket && seat_atoi[j] != 0)
                     {
-                        strcpy(name_split[j], "Empty");
+                        fprintf(fp, "Empty ");
+                        fprintf(fp2, "%d ", seat_atoi[j]);
                     }
                 }
             }
@@ -531,7 +535,8 @@ void cancel_ticket_print()
                     }
                     else if (seat_atoi[j] == canceled_ticket && seat_atoi[j] != 0)
                     {
-                        strcpy(name_split[j], "Empty");
+                        fprintf(fp, "Empty ");
+                        fprintf(fp2, "%d ", seat_atoi[j]);
                     }
                 }
             }
