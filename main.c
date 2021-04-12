@@ -22,11 +22,12 @@ void print_bus_list();
 void cancel_ticket_print();
 void cancel_ticket_main();
 void split_seats();
+void remove_empty_seats();
 
 // Variables
 const char login[] = "user", pass[] = "pass";
 char login_input[] = "user", pass_input[] = "pass";
-int dec,i,j,k,cnt,count_names = 0,num_tickets,choice,free_seats,canceled_ticket,seat_atoi[32] = {0},count_seats = 0;
+int dec,i,j,k,cnt,count_names = 0,num_tickets,choice,free_seats,canceled_ticket,seat_atoi[32] = {0},count_seats = 0,count_empty,seat_empty[32] = {0};
 char name[200],name_split[32][10],res_name[100],seat[200],res_seat[100],seat_split[32][10];
 char bus_list_5[5][20] = {"Cardiff Express", "Delfast Express", "Derby Express", "Chester Express", "Newport Express"};
 
@@ -89,6 +90,7 @@ void book_ticket()
     bus_file_read();
     split_names();
     split_seats();
+    remove_empty_seats();
     bus_seats_print();
     _register_1st_part();
     _register();
@@ -101,6 +103,7 @@ void cancel_ticket()
     bus_file_read();
     split_names();
     split_seats();
+    remove_empty_seats();
     bus_seats_print();
     cancel_ticket_main();
 }
@@ -129,6 +132,7 @@ void bus_status()
     bus_file_read();
     split_names();
     split_seats();
+    remove_empty_seats();
     bus_seats_print();
     for (i = 3; i >= 1; i--)
     {
@@ -261,6 +265,121 @@ void split_seats()
     }
 }
 
+
+void remove_empty_seats()
+{
+    FILE *fp, *fopen();
+    FILE *fp2, *fopen();
+    switch (dec)
+    {
+
+    case 1:
+        fp = fopen("name1.txt", "w+");
+        fp2 = fopen("seat1.txt", "w+");
+        for(i=0; i<count_names; i++)
+        {
+            if(strcmp(name_split[i], "Empty") == 0)
+            {
+                fprintf(fp2, "%d ", seat_atoi[i+1]);
+                fprintf(fp, "%s ", name_split[i+1]);
+                i++;
+            }
+            else
+            {
+                fprintf(fp2, "%d ", seat_atoi[i]);
+                fprintf(fp, "%s ", name_split[i]);
+            }
+        }
+        fclose(fp);
+        fclose(fp2);
+        break;
+
+    case 2:
+        fp = fopen("name2.txt", "w+");
+        fp2 = fopen("seat2.txt", "w+");
+        for(i=0; i<count_names; i++)
+        {
+            if(strcmp(name_split[i], "Empty") == 0)
+            {
+                fprintf(fp2, "%d ", seat_atoi[i+1]);
+                fprintf(fp, "%s ", name_split[i+1]);
+                i++;
+            }
+            else
+            {
+                fprintf(fp2, "%d ", seat_atoi[i]);
+                fprintf(fp, "%s ", name_split[i]);
+            }
+        }
+        fclose(fp);
+        fclose(fp2);
+        break;
+
+    case 3:
+        fp = fopen("name3.txt", "w+");
+        fp2 = fopen("seat3.txt", "w+");
+        for(i=0; i<count_names; i++)
+        {
+            if(strcmp(name_split[i], "Empty") == 0)
+            {
+                fprintf(fp2, "%d ", seat_atoi[i+1]);
+                fprintf(fp, "%s ", name_split[i+1]);
+                i++;
+            }
+            else
+            {
+                fprintf(fp2, "%d ", seat_atoi[i]);
+                fprintf(fp, "%s ", name_split[i]);
+            }
+        }
+        fclose(fp);
+        fclose(fp2);
+        break;
+
+    case 4:
+        fp = fopen("name4.txt", "w+");
+        fp2 = fopen("seat4.txt", "w+");
+        for(i=0; i<count_names; i++)
+        {
+            if(strcmp(name_split[i], "Empty") == 0)
+            {
+                fprintf(fp2, "%d ", seat_atoi[i+1]);
+                fprintf(fp, "%s ", name_split[i+1]);
+                i++;
+            }
+            else
+            {
+                fprintf(fp2, "%d ", seat_atoi[i]);
+                fprintf(fp, "%s ", name_split[i]);
+            }
+        }
+        fclose(fp);
+        fclose(fp2);
+        break;
+
+    case 5:
+        fp = fopen("name5.txt", "w+");
+        fp2 = fopen("seat5.txt", "w+");
+        for(i=0; i<count_names; i++)
+        {
+            if(strcmp(name_split[i], "Empty") == 0)
+            {
+                fprintf(fp2, "%d ", seat_atoi[i+1]);
+                fprintf(fp, "%s ", name_split[i+1]);
+                i++;
+            }
+            else
+            {
+                fprintf(fp2, "%d ", seat_atoi[i]);
+                fprintf(fp, "%s ", name_split[i]);
+            }
+        }
+        fclose(fp);
+        fclose(fp2);
+        break;
+    }
+}
+
 void bus_seats_print()
 {
     free_seats = 32 - count_names;
@@ -381,7 +500,6 @@ void bus_file_write()
     case 3:
         fp = fopen("name3.txt", "a");
         fprintf(fp, "%s ", res_name);
-        ;
         fclose(fp);
         fp2 = fopen("seat3.txt", "a");
         fprintf(fp2, "%s ", res_seat);
