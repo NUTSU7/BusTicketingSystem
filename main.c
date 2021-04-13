@@ -25,8 +25,6 @@ void split_seats();
 void remove_empty_seats();
 
 // Variables
-const char login[] = "user", pass[] = "pass";
-char login_input[] = "user", pass_input[] = "pass";
 int dec,i,j,k,cnt,count_names = 0,num_tickets,choice,free_seats,canceled_ticket,seat_atoi[32] = {0},count_seats = 0,count_empty,seat_empty[32] = {0};
 char name[200],name_split[32][10],res_name[100],seat[200],res_seat[100],seat_split[32][10];
 char bus_list_5[5][20] = {"Cardiff Express", "Delfast Express", "Derby Express", "Chester Express", "Newport Express"};
@@ -667,6 +665,8 @@ void cancel_ticket_print()
 
 void log_in()
 {
+    const char login[] = "user", pass[] = "pass";
+    char login_input[10], pass_input[10];
     printf("\t\t\tUSERNAME - ");
     scanf("%16[^\n]%*c", login_input);
     printf("\n");
