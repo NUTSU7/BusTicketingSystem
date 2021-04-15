@@ -26,3 +26,6 @@ The **"main.c"** is the main file and the **"name1.txt-name5.txt"** is where the
 
 # Important Note
 **Files shouldn't be saved manually**(depending on the text editor you are using, it could break the program :) )
+
+# PS
+**Username - user, Pass - pass, u can modify those in the "log_in" function, maybe in the future when i am free i will add a "Register" function**
